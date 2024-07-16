@@ -1,5 +1,7 @@
 package ex;
 
+import java.util.Scanner;
+
 /** 자바 코드실행 방법
  * 1) 위에 Run 버튼
  * 2) ctrl + f11
