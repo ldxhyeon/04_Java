@@ -336,33 +336,32 @@ public class ConditionEx {
 			int arr[] = {kor, eng, mat, soc, sci};
 			
 			
-//			
-//			// 방법 1
-//			if(kor > 40) {
-//				result = "국어";
-//			}else {
-//				result = "성적 : F";
-//			}
-//			
-//			System.out.println(result);
-			
 			String result = "";
 			
-			for(int i = 0; i < arr.length; i++) {
-				if(arr[i] < 40) {
-					result += "국어";
-				}else if(arr[i] < 40) {
-					result += "수학";
-				}else if(arr[i] < 40) {
-					result += "사회";
-				}else if(arr[i] < 40) {
-					result += "과학";
-				}else if(arr[i] < 40){
-					return;
-				}
+			if(arr[0] < 40) {
+				result += "국어 ";
 			}
 			
-			System.out.println(result);
+			if(arr[1] < 40) {
+				result += "영어 ";
+			}
+			
+			if(arr[2] < 40) {
+				result += "수학 ";
+			}
+			
+			if(arr[3] < 40) {
+				result += "사회 ";
+			}
+			
+			if(arr[4] < 40) {
+				result += "과학 ";
+			}
+			
+			
+//			FAIL [40점 미만 과목 : 국어 영어]
+			System.out.printf("FAIL [ 40점 미만 과목 : %s]\n", result);
+			System.out.println();
 			
 			
 			
