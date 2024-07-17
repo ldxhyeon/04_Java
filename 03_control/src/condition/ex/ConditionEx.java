@@ -338,40 +338,90 @@ public class ConditionEx {
 			int arr[] = {kor, eng, mat, soc, sci};
 			
 			
-			String result = "";
-			
-			if(arr[0] < 40) {
-				result += "국어 ";
-			}
-			
-			if(arr[1] < 40) {
-				result += "영어 ";
-			}
-			
-			if(arr[2] < 40) {
-				result += "수학 ";
-			}
-			
-			if(arr[3] < 40) {
-				result += "사회 ";
-			}
-			
-			if(arr[4] < 40) {
-				result += "과학 ";
-			}
-			
-			
+			//  1번방법
+//			String result = "";
+//			
+//			if(arr[0] < 40) {
+//				result += "국어 ";
+//			}
+//			
+//			if(arr[1] < 40) {
+//				result += "영어 ";
+//			}
+//			
+//			if(arr[2] < 40) {
+//				result += "수학 ";
+//			}
+//			
+//			if(arr[3] < 40) {
+//				result += "사회 ";
+//			}
+//			
+//			if(arr[4] < 40) {
+//				result += "과학 ";
+//			}
+//			
+//			
 //			FAIL [40점 미만 과목 : 국어 영어]
-			System.out.printf("FAIL [ 40점 미만 과목 : %s]\n", result);
-			System.out.println();
+//			System.out.printf("FAIL [ 40점 미만 과목 : %s]\n", result);
+//			System.out.println();
+
+			
+			
+//			if(sum2 < 60) {
+//				System.out.printf("FAIL [점수 : %.1f (평균 미달)]", sum2);
+//			}else {
+//				System.out.printf("PASS [ 점수 : %.1f / 100 ]", sum2);
+//			}
 			
 			
 			
-			if(sum2 < 60) {
-				System.out.printf("FAIL [점수 : %.1f (평균 미달)]", sum2);
-			}else {
-				System.out.printf("PASS [ 점수 : %.1f / 100 ]", sum2);
-			}
+			// 2번 방법
+	 		boolean flag = false; 
+	 		
+	 		String str = ""; // 빈칸(자료형 : String, 내용 X)
+	 		
+	 		if(kor < 40) {
+	 			flag = true;
+	 			str += "국어 ";
+	 		}
+	 		
+	 		if(eng < 40) {
+	 			flag = true;
+	 			str += "영어 ";
+	 		}
+	 		
+	 		if(mat < 40) {
+	 			flag = true;
+	 			str += "수학 ";
+	 		}
+	 		
+	 		if(soc < 40) {
+	 			flag = true;
+	 			str += "사회 ";
+	 		}
+	 		
+	 		if(sci < 40) {
+	 			flag = true;
+	 			str += "과학 ";
+	 		}
+	 		
+	 		
+	 		// 40점 미만 과목이 존재하는 경우
+	 		if(flag) {
+	 			System.out.printf("FAIL [40점 미만 과목 : %s]", str);
+	 			return;
+	 		}
+	 		
+	 		// 평균(double형 결과를 반환 받기 위해 5.0으로 나눔)
+	 		double avg = (kor + eng + mat + soc + sci) / 5.0;
+	 		
+	 		if(avg < 60.0) {
+	 			System.out.printf("FAIL [점수 : %.1f (평균 미달)]", avg);
+	 			return; //  Early return; (중간에 메서드를 종료)
+	 		}
+	 		
+	 		System.out.printf("PASS [점수 : %.1f / 100]", avg);
 			
 		}
 	
