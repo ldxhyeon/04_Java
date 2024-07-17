@@ -244,6 +244,8 @@ public class ConditionEx {
 		System.out.println(result);
 		
 		
+		
+		
 		/* 방법 2
 		// 삼항연산자의 풀이 
 		if(sum >= 90) result = "A" + ( sum>=95 ? "+" : "" );
