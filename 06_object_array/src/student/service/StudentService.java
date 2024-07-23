@@ -130,8 +130,111 @@ public class StudentService {
 		
 		return null;
 	}
+
+	/**
+	 * 전달 받은 index가 students 범위 내인지
+	 *  + 정상 범위라면 해당 index가 학생 객체를 참조하는지 확인
+	 * @param index
+	 * @return 1 또는 2 또는 3(정상)
+	 */
+	public int checkIndex(int index) {
+		
+		 /* 입력 받은 index가 정상인지 판별
+			 1 == 범위 초과
+			 2 == 학생 없음
+			 3 == 정상
+		 */ 
+		
+		if(index < 0 || index >= students.length) {
+			return 1;
+		}
+		
+		if(students[index] == null) return 2;
+		
+		return 3;
+	}
+
+	/*
+	 * 
+	 * 전달 받은 index 번째 학생의 점수 수정
+	 * @param index
+	 * @param scores
+	 * 
+	 */
+	public void updateScores(int index, StudentDTO other) {
+		
+		// 객체 배열 : 객체 참조형 변수를 묶음으로 다룸
+		
+		// student[index] 번째에 저장된 주소 얕은 복사
+		StudentDTO s = students[index];
+		
+		s.setHtml(other.getHtml());
+		s.setCss(other.getHtml());
+		s.setJs(other.getHtml());
+		s.setJava(other.getHtml());
+		
+		
+		
+		return; // 안써도 컴파일러가 추가
+	}
+
+
 	
-	
+	/**
+	 * 평균 최대/최소 구하기
+	 * @return
+	 * 최고점 : 짱구(85.4)
+	 * 최저점 : 맹구(61.5)
+	 */
+	public String selectMaxMin() {
+		
+		double maxAvg = 0.0;
+		double minAvg = 0.0;
+		
+		String maxName = null;
+		String minName = null;
+		
+		
+		// 최고/최점 판별
+		for(StudentDTO std : students) {
+			
+			if(std == null) break; // 학생이 없으면 반복 멈춤
+			
+			int sum = std.getHtml() + std.getCss()
+					  + std.getJs() + std.getJava();
+			
+			double avg = sum / 4.0;
+			
+			// for문 첫 반복일 때
+			if(maxAvg == 0.0) {
+				maxAvg = avg;
+				maxName = std.getName();
+				
+				minAvg = avg;
+				minName = std.getName();
+				continue;
+			}
+			
+			
+			if(avg > maxAvg) { // 기존 최대값 보다 현재 평균이 클 때
+				maxAvg = avg;
+				maxName = std.getName();
+			}
+			
+			if(avg < minAvg) { // 기존 최소값 보다 현재 평균이 작을 때
+				minAvg = avg;
+				minName = std.getName();
+			}
+			
+		}
+		
+		
+		String result 
+			= String.format("최고점 : %s(%.1f)\n최저점 : %s(%.1f)\n",
+					maxName, maxAvg, minName, minAvg);
+		
+		return result;
+	}
 	
 	
 	

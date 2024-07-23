@@ -18,7 +18,6 @@ public class StudentDTO {
 	// - 생성자가 하나 이상 존재할 경우 -> 컴파일러가 기본 생성자 추가 안함
 	
 	
-	
 	// 매개 변수 생성자
 	// -> 컴파일러가 기본 생성자를 만들지 않기 때문에
 	//	필요하면 기본 생성자를 필수 작성 !
@@ -28,7 +27,17 @@ public class StudentDTO {
 		this.gender = gender;
 	}
 	
+
 	
+	// 정수 담는 용도로 객체 생성할 때 사용하는 생성자
+	public StudentDTO(int html, int css, int js, int java) {
+//		super();
+		this.html = html;
+		this.css = css;
+		this.js = js;
+		this.java = java;
+	}
+
 
 	public String getStudentNumber() {
 		return studentNumber;
