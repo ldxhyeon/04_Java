@@ -66,7 +66,7 @@ public class main {
 		String searchName = sc.next();
 		
 		
-		boolean result = false;
+		boolean result = true;
 		
 		
 		// 1 이 아닌  0의 값 부터 시작
@@ -76,8 +76,6 @@ public class main {
 				// false 반환
 				result = false;
 				break;
-			}else {
-				result = true;
 			}
 			
 		}

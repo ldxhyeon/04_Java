@@ -78,7 +78,7 @@ public class ExDTO {
 	}
 	
 	
-	
+	@Override
 	public String toString() {
 		return String.format("%s / %c / %s\n"
 				+ "HTML : %d / CSS : %d / JS : %d / Java : %d", 

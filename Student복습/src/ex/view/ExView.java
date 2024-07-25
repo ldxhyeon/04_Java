@@ -44,10 +44,10 @@ public class ExView {
 			
 			
 			switch(input) {
-			case 1: addStudent(); break;
-			case 2: break;
-			case 3: break;
-			case 4: break;
+			case 1: addStudent();	break;
+			case 2: allStudent(); 	break;
+			case 3: selectIndex(); 	break;
+			case 4: selectName();	break;
 			case 5: break;
 			case 6: break;
 			case 7: break;
@@ -87,13 +87,69 @@ public class ExView {
 		}
 		
 		
+	}
+	
+	
+	public void allStudent() {
 		
+		System.out.println("\n----- 학생 전체 조회 -----\n");
+		
+		
+		ExDTO[] students = service.getStudents();
+		
+		for(ExDTO std : students) {
+			if(std == null) {
+				return;
+			}
+			
+			System.out.println(std.toString());
+			System.out.println("------------------------");
+		}
+	
 	}
 	
 	
 	
+	public void selectIndex() {
+		
+		System.out.println("\n----- 학생 1명 조회 -----\n");
+		
+		System.out.println("조회할 인덱스 입력 : ");
+		int index = sc.nextInt();
+		
+		ExDTO std = service.selectIndex(index);
+		
+		if(std == null) {
+			System.out.println("해당 인덱스에 학생이 존재하지 않습니다.");
+		}
+		
+		System.out.println(index + "번째 학생 정보");
+		
+		// ExDTO 클래스에서 toString() 메서드를 오버라이드하지 않았다면, 
+		// Object 클래스의 기본 toString()이 호출되어 객체의 클래스 이름과 해시코드가 출력됩니다.
+		System.out.println(std.toString());
+	}
 	
+	public void selectName() {
+		
+		System.out.println("\n----- 이름으로 조회 -----\n");
+		
+		System.out.println("검색할 학생 이름 ");
+		String name = sc.next();
+		
+		ExDTO std = service.selectName(name);
+		
+		if(std == null) {
+			System.out.println("해당 인덱스에 학생이 존재하지 않습니다.");
+			return;
+		}
+		
+		System.out.println(std.toString());
+		
+		
+	}
 	
+ 	
 	
 	
 	

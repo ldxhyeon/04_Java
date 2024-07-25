@@ -116,7 +116,7 @@ public class StudentView {
 				// null인 경우 == 저장된 학생이 없을 때
 				// -> NullPointerException 방지
 				//   (참조변수가 null을 저장하고 있는데 사용하려고 할 때)
-				if(std == null) return;  
+				if(std == null) return;   
 				
 				System.out.println( std.toString() );
 				System.out.println("-----------------------------------");

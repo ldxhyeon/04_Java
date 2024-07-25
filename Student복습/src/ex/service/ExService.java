@@ -55,7 +55,38 @@ public class ExService {
 	
 	}
 	
+	public ExDTO[] getStudents() {
+		return students;
+	}
 	
+	
+	public ExDTO selectIndex(int index) {
+		
+		if(index < 0 || index >= students.length) {
+			return null;
+		}
+		
+		return students[index];
+		
+	}
+	
+	public ExDTO selectName(String name) {
+		
+		
+		
+		for(ExDTO std : students) {
+			if( std == null ) {
+				return null;
+			}
+			
+			if(std.getName().equals(name)) {
+				return std;
+			}
+		}
+		
+		return null;
+	}
+ 	
 	
 	
 	
