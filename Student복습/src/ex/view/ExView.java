@@ -48,7 +48,7 @@ public class ExView {
 			case 2: allStudent(); 	break;
 			case 3: selectIndex(); 	break;
 			case 4: selectName();	break;
-			case 5: break;
+			case 5: updateIndex();  break;
 			case 6: break;
 			case 7: break;
 			
@@ -145,6 +145,30 @@ public class ExView {
 		}
 		
 		System.out.println(std.toString());
+		
+	}
+	
+	public void updateIndex() {
+		System.out.println("수정할 학생의 인덱스 번호 입력 : ");
+		int index = sc.nextInt();
+		
+		int check = service.checkIndex(index);
+		
+		if(check == 1) {
+			System.out.println("인덱스 범위가 올바르지 않습니다.");
+			return;
+		}
+		
+		if(check == 2) {
+			System.out.println("해당 인덱스에 학생 정보가 존재하지 않습니다.");
+			return;
+		}
+		
+		System.out.println("HTML, CSS, JS, JAVA 순서로 점수 입력 : ");
+		int html = sc.nextInt();
+		int css = sc.nextInt();
+		int js = sc.nextInt();
+		int java = sc.nextInt();
 		
 		
 	}

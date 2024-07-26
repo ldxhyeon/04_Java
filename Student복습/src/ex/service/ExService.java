@@ -86,6 +86,24 @@ public class ExService {
 		
 		return null;
 	}
+	
+	
+	
+	public int checkIndex(int index) {
+		
+		
+		
+		if(index < 0 || index < students.length ) {
+			return 1;
+		}
+		
+		if(students[index] == null ) {
+			return 2;
+		}
+		
+		// 정상일때 값을 반환해야 if문에서 조건 성립을 안시킴.
+		return 3;
+	}
  	
 	
 	
