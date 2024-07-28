@@ -55,6 +55,7 @@ public class StudentView {
 			}
 			
 			
+		// while : 참이면 루플 무한반복 거짓이면 종료
 		}while(input != 0);
 		
 	}
