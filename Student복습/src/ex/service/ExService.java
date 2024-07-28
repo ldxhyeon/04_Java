@@ -92,8 +92,7 @@ public class ExService {
 	public int checkIndex(int index) {
 		
 		
-		
-		if(index < 0 || index < students.length ) {
+		if(index < 0 || index >= students.length ) {
 			return 1;
 		}
 		
@@ -104,6 +103,64 @@ public class ExService {
 		// 정상일때 값을 반환해야 if문에서 조건 성립을 안시킴.
 		return 3;
 	}
+
+	public void updateScores(int index, ExDTO scores) {
+		
+		// 같은 객체가 같은곳을 참조한다. (얕은복사)
+		ExDTO s = students[index];
+		
+		s.setCss(scores.getCss());
+		s.setHtml(scores.getHtml());
+		s.setJava(scores.getJava());
+		s.setJs(scores.getJs());
+		
+		return;
+	}
+	
+	public String selectMaxMin() {
+		
+		double maxAvg = 0.0;
+		double minAvg = 0.0;
+		
+		String maxName = "";
+		String minName = "";
+		
+		
+		for(ExDTO std : students) {
+			if(std == null) break;
+		
+			int sum = std.getCss() + std.getHtml() + std.getJava() + std.getJs();
+			
+			double avg = sum / 4;
+			
+			if(maxAvg == 0) {
+				maxAvg = avg;
+				maxName = std.getName();
+				
+				minAvg = avg;
+				minName = std.getName();
+				continue;
+			}
+			
+			if(avg > maxAvg) {
+				maxAvg = avg;
+				maxName = std.getName();
+			}
+			
+			if(avg < minAvg) {
+				minAvg = avg;
+				minName = std.getName();
+			}
+			
+		}
+		
+		String result = String.format("최고점 : %s(%.1f)\n최저점 : %s(%.1f)",
+				maxName,maxAvg,minName,minAvg);
+		
+		return result;
+	}
+	
+	
  	
 	
 	

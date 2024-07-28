@@ -21,6 +21,15 @@ public class ExDTO {
 	}
 	
 
+	public ExDTO(int html, int css, int js, int java) {
+		super();
+		this.html = html;
+		this.css = css;
+		this.js = js;
+		this.java = java;
+	}
+
+
 	public String getStudentNumber() {
 		return studentNumber;
 	}
