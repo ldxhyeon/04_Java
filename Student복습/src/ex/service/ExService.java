@@ -229,6 +229,76 @@ public class ExService {
 		
 	}
 
+	public int updateIndex(int index) {
+		
+		if(index < 0 || index >= students.length) {
+			return 1;
+		}
+		
+		if(students[index] == null) {
+			return 2;
+		}
+		
+		return 3;
+	}
+
+	public void checkScore(ExDTO scores, int index) {
+		
+		ExDTO s = students[index];
+		
+		s.setHtml(scores.getHtml());
+		s.setCss(scores.getCss());
+		s.setJava(scores.getJava());
+		s.setJs(scores.getJs());
+		
+	}
+	
+	public String selectMaxMin() {
+		
+		String maxName = "";
+		String minName = "";
+		
+		double maxAvg = 0.0;
+		double minAvg = 0.0;
+		
+		for(ExDTO std : students) {
+			if(std == null) break;
+			
+			int sum = std.getHtml() + std.getCss() + std.getJava() + std.getJs();
+			double score = sum / 4;
+			
+			
+			if(maxAvg == 0) {
+				maxAvg = score;
+				maxName = std.getName();
+				
+				minAvg = score;
+				minName = std.getName();
+				continue;
+			}
+			
+			
+			if(score > maxAvg) {
+				maxAvg = score;
+				maxName = std.getName();
+			}
+			
+			
+			if(score < minAvg) {
+				minAvg = score;
+				minName = std.getName();
+			}
+	
+		}
+		
+		
+		
+		String result = String.format("최고점 : %s(%.1f)\n최저점 : %s(%.1f)",
+				maxName,maxAvg,minName,minAvg);
+		
+		return result;
+	}
+
 
 
 

@@ -263,9 +263,9 @@ public class ExView {
 			case 2: allStudent();  break;
 			case 3: selectIndex(); break;
 			case 4: selectName();  break;
-			case 5: break;
-			case 6: break;
-			case 7: break;
+			case 5: updateIndex(); break;
+			case 6: selectScore(); break;
+			case 7: selectMaxMin();break;
 			
 			case 0 :  System.out.println("*** 프로그램 종료 *** "); break;
 			default : System.err.println(" ** 메뉴 번호 잘못 입력 ***  ");
@@ -278,14 +278,7 @@ public class ExView {
 	}
 	
 	
-
-
-
-
-
-
-
-
+	
 	public void addStudent() {
 		
 		System.out.println("\n------ 학생 추가 -----\n");
@@ -361,6 +354,72 @@ public class ExView {
 		}
 		
 		System.out.println(std);
+	}
+	
+	
+	private void updateIndex() {
+		System.out.println("\n------ 학생 수정 ------\n");
+		
+		System.out.println("수정할 학생의 인덱스 번호 입력 : ");
+		int index = sc.nextInt();
+		
+		int check = service.updateIndex(index);
+		
+		if(check == 1) {
+			System.out.println("번호를 잘못 입력하셨습니다.");
+		}
+		
+		if(check == 2) {
+			System.out.println("해당 인덱스에 학생이 존재 하지 않습니다.");
+		}
+		
+		
+		System.out.println("HTML, CSS, JS, JAVA 순서로 점수 입력 : ");
+		int html = sc.nextInt();
+		int css = sc.nextInt();
+		int js = sc.nextInt();
+		int java = sc.nextInt();
+		
+		ExDTO scores = new ExDTO(html, css, js, java);
+		
+		service.checkScore(scores, index);
+		
+		System.out.println("** 점수 수정 완료 **");
+		
+	}
+	
+	public void selectScore() {
+		System.out.println("\n------ 학생 점수 조회 ------\n");
+		
+		System.out.println("인덱스 입력 : ");
+		int index = sc.nextInt();
+		System.out.println("-----------------------------------");
+		
+		ExDTO std = service.selectIndex(index);
+		
+		if(std == null) {
+			System.err.println("해당 인덱스에 학생이 존재하지 않습니다.");
+			return;
+		}
+				
+		System.out.println("이름 : " + std.getName());
+		System.out.println("-----------------------------------");
+		
+		int sum = std.getHtml() + std.getCss() + std.getJava() + std.getJs();
+		double result = sum / 4;
+		
+		System.out.println("합계 : " + sum);
+		System.out.println("평균 : " + result);
+		
+	}
+	
+	public void selectMaxMin() {
+		
+		System.out.println("\n----- 평균 최고점/최저점 조회 -----\n");
+		
+		String result = service.selectMaxMin();
+		
+		System.out.println(result);
 	}
 	
 	
