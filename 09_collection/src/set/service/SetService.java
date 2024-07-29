@@ -271,6 +271,9 @@ public class SetService {
 		
 		// 생성된 로또 번호를 저장할 List 생성
 		
+		// List는 중복객체를 가질 수 있으나
+		// Set 안에 숫자나 다른 무언가는 같은 값을 가질 수 없음
+		// 그런 동적인 배열을 만듦.
 		List<Set<Integer>> lottoList = new ArrayList<Set<Integer>>();
 		
 		System.out.println("금액 입력 : ");

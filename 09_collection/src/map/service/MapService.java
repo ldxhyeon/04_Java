@@ -35,7 +35,7 @@ public class MapService {
 		
 		// HashMap : 대표적인 Map 상속 객체
 		// - Hash 단어가 붙으면 빠름
-		// -> 대신 Ket 역할의 객체가
+		// -> 대신 Key 역할의 객체가
 		// equals(), hashCode()	오버라이딩 필수!
 		
 		//   K        V
