@@ -1,5 +1,6 @@
 package list.view;
 
+import java.awt.print.Book;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,8 +44,8 @@ public class BookView {
 			case 4 : selectWriter();break;
 			case 5 : selectPrice(); break;
 			case 6 : addBook(); 	break;
-			case 7 : break;
-			case 8 : break;
+			case 7 : removeBook();  break;
+			case 8 : updateBook();  break;
 			
 			
 			case 0: System.out.println("***** 프로그램 종료 *****");break;
@@ -173,6 +174,48 @@ public class BookView {
 		}
 				
 				
+	}
+	
+	public void removeBook() {
+		System.out.println("\n@@@@ 책 삭제하기 @@@@\n");
+		
+		System.out.println("조회할 책의 index 번호 입력 : ");
+		int index = sc.nextInt();
+		
+		BookDTO removedBook = service.removeBook(index);
+		
+		if (removedBook != null) {
+	        System.out.println("삭제된 책: " + removedBook);
+	    } else {
+	        System.out.println("유효하지 않은 인덱스입니다. 책이 삭제되지 않았습니다.");
+	    }
+		
+	}
+	
+	public void updateBook() {
+		System.out.println("\n@@@@ 책 가격 수정하기 @@@@\n");
+		
+		System.out.println("수정할 책의 인덱스 입력 : ");
+		int index = sc.nextInt();
+		
+		BookDTO updateIndex = service.updateBook(index);
+		
+		if(updateIndex == null) {
+			System.out.println("해당 인덱스에 책이 존재하지 않습니다");
+			return;
+		}
+		
+		System.out.println("수정할 가격 입력 : ");
+		int price = sc.nextInt();
+		
+		
+		int beforePrice = updateIndex.getPrice();
+		
+		updateIndex.setPrice(price);
+		
+		System.out.printf("[%s] 가격이 (%d) -> (%d) 수정 되었습니다.\n",
+				updateIndex.getTitle(), beforePrice, price);
+		
 	}
 	
 

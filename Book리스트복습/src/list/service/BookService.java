@@ -86,6 +86,27 @@ public class BookService {
 		// add 메서드는 true false를 반환함
 		return bookList.add(newBook);
 	}
+
+
+	public BookDTO removeBook(int index) {
+		
+		if(index < 0 || index >= bookList.size()) {
+			return null;
+		}
+		
+		return bookList.remove(index);
+	}
+
+
+	public BookDTO updateBook(int index) {
+		
+		if(index < 0 || index >= bookList.size()) {
+			return null;
+		}
+		
+		
+		return bookList.get(index);
+	}
 	
 	
 	

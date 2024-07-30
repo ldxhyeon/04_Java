@@ -129,7 +129,8 @@ public class ThrowsService {
 				
 			}catch(InputMismatchException e) {
 				System.out.println("*** 정수만 입력해 주세요 ***");
-				sc.next(""); // dlqfur
+				sc.next(""); // 입력
+				
 				
 				input = -1; // 첫 본박식
 				

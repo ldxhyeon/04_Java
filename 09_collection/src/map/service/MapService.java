@@ -109,6 +109,7 @@ public class MapService {
 		/* 2) Map.entrySet() 이용 */
 		// -> K:V쌍 형태의 객체를 모아둔 집합(Set) 반환
 		
+		// 키 밸류 값을 한번에 받아서 Set 타입으로 받음
 		Set<Entry<String, Object>> set = student.entrySet();
 		
 		System.out.println(set);

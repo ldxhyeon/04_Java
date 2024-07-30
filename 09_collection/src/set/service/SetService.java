@@ -244,6 +244,33 @@ public class SetService {
 		
 	}
 	
+	public void test5() {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		Random random = new Random();
+		
+		List<Set<Integer>> lottoList = new ArrayList<Set<Integer>>();
+		
+		System.out.println("금액 입력 : ");
+		int index = sc.nextInt();
+		
+		for(int i = 0; i < index / 1000 ; i++) {
+			
+			Set<Integer> lotto = new TreeSet<Integer>();
+			
+			while(lotto.size() < 6) {
+				lotto.add( random.nextInt(45) + 1 );
+			}
+			
+			lottoList.add(lotto);
+		}
+		
+		for(int i = 0; i < lottoList.size(); i++) {
+			System.out.println(lottoList.get(i));
+		}
+	}
+	
 	/** 로또 번호 생성기
 	 * 
 	 * - 금액을 천원 단위로 입력 받아
