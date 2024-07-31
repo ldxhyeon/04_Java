@@ -102,7 +102,7 @@ public class FileService {
 			
 			try { // 예외가 발생할 것 같은 구문을 내부에 작성 후 시도
 			
-			// 파일 생성이 성공한 경
+			// 파일 생성이 성공한 경우
 			if(file.createNewFile()) {
 				System.out.println(file.getName() + " 파일이 생성 되었습니다.");
 				}
