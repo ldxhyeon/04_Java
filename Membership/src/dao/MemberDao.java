@@ -34,8 +34,9 @@ public interface MemberDao {
 	void saveFile() throws IOException;
 
 
-	/**
-	 * 파일 저장
-	 */
+	
+	List<Member> selectName();
+
+
 	
 }

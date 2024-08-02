@@ -51,11 +51,11 @@ public class MemberView {
 				
 				
 				
-				case 2 : selectAll();	break;
-				case 3 : break;
-				case 4 : break;
-				case 5 : break;
-				case 6 : break;
+				case 2 : selectAll();		break;
+				case 3 : selectName();		break;
+				case 4 : updateAmount();	break;
+				case 5 : updateMember(); 	break;
+				case 6 : deleteMember(); 	break;
 				case 7 : break;
 				
 				case 0 : System.out.println("**** 프로그램 종료 ****") ;break;
@@ -177,10 +177,230 @@ public class MemberView {
 					member.getName(), member.getPhone(), member.getAmount(), gradesArr[member.getGrade()]);
 		}
 		
+	}
+	
+	
+	
+	// ------------------------------------------------------------------------------
+	
+	// [이름으로 검색(동명이인)]
+	private void selectName() throws IOException {
+		System.out.println("\n----- 이름 검색(동명이인 있으면 모두 조회) -----\n");
 		
-				
+		// 검색할 이름 입력 받기
+		System.out.print("검색할 이름 입력 : ");
+		String searchName = br.readLine();
+		
+		// 이름 검색 서비스 호출 후 결과 반환 받기
+		List<Member> searchList = service.selectName(searchName);
+		
+		// 검색 결과가 없을 경우
+		if(searchList.isEmpty()) {
+			System.out.println("\n### 검색 결과가 없습니다. ###\n.");
+			return;
+		}
+		
+		// 검색 결과가 있을 경우
+		
+		for(Member member : searchList) {
+			System.out.println(member);
+		}
+	}
+	
+	
+	
+	private void updateAmount() throws IOException {
+		System.out.println("\n----- 특정 회원 사용 금액 누적하기 -----\n");
+		
+		System.out.print("검색할 이름 입력 : ");
+		String targetName = br.readLine();
+		
+		// 이름이 일치하는 회원 모두 조회
+		List<Member> searchList = service.selectName(targetName);
+		
+		// 이름이 일치하는 회원이 없을경우
+		if(searchList.isEmpty()) {
+			System.out.println("\n### 이름이 일치하는 회원이 존재하지 않습니다 ###\n");
+			return;
+		}
+		
+		// 금액 증가 대상 회원만 참조할 Member 참조 변수 선언
+		Member target = null;
+		
+		// 1) 동명이인이 있을 경우
+		//    -> 이름 / 전화번호를 출력해서 한 명만 선택하게 함
+		if(searchList.size() > 1) {
+			System.out.println("\n*** 대상 회원을 선택 해주세요. ***\n");
+			
+			// 일반 for문 사용 이유 -> i 값 활용하고 싶어서 사용
+			for(int i = 0; i < searchList.size(); i++) {
+				System.out.printf("%d) %s (%s)\n",
+							i+1, searchList.get(i).getName(), searchList.get(i).getPhone() );
+			}
+			
+			System.out.print("선택할 회원의 번호를 입력 : ");
+			// 문자열 정수로 변환
+			// 입력된 번호를 index에 맞추기 위해 -1
+			int input = Integer.parseInt(br.readLine() ) -1;
+			
+			// 입력 된 번호가 searchList의 index범위를 초과한 경우
+			if(input < 0 || input >= searchList.size()) {
+				System.out.println("\n### 없는 회원 번호입니다 다시 시도 해주세요. ###\n");
+				return;
+			}
+			
+			target = searchList.get(input);
+			System.out.println();
+			
+		} else {
+			// 2) 동명 이인이 없을 경우
+			target = searchList.get(0);
+		}
+		
+		// 누적할 금액 입력
+		System.out.println("누적할 금액 입력 : ");
+		int acc = Integer.parseInt( br.readLine() );
+		
+		// 대상 회원, 누적할 금액을 서비스로 전달하여 결과 반환
+		// - 금액 누적
+		// - 등급 조
+		// - 파일에 데이터 저장
+		
+		
+		// - 서비스에서 반환 받을 문자열
+		// ex) 신짱구 회원님의 누적 금액
+		// 	   2000 -> 9000
+		//     * 골드 * 등급으로 변경 되셨습니다.
+		String result = service.updateAmount(target, acc);
+		
+		System.out.println(result);
 		
 	}
+	
+	private void updateMember() throws IOException {
+		System.out.println("\n----- 회원 정보 수정 -----\n");
+		
+		System.out.print("검색할 이름 입력 : ");
+		String targetName = br.readLine();
+		
+		List<Member> searchList = service.selectName(targetName);
+		
+		if(searchList.isEmpty()) {
+			System.out.println("\n### 이름이 일치하는 회원이 존재하지 않습니다 ###\n");
+			return;
+		}
+		
+		// 수정 대상을 참조할 변수 선언
+		Member target = null;
+		
+		if(searchList.size() > 1) { // 동명이인 있을 경우
+			System.out.println("\n*** 대상 회원을 선택 해주세요. ***\n");
+			
+			for(int i = 0; i < searchList.size(); i++) {
+				System.out.printf("%d) %s (%s)\n",
+							i+1, searchList.get(i).getName(), searchList.get(i).getPhone() );
+			}
+			
+			System.out.print("선택할 회원의 번호를 입력 : ");
+			int input = Integer.parseInt(br.readLine() ) -1;
+			
+			if(input < 0 || input >= searchList.size()) {
+				System.out.println("\n### 없는 회원 번호입니다 다시 시도 해주세요. ###\n");
+				return;
+			}
+			
+			target = searchList.get(input);
+			System.out.println();
+			
+		} else { // 동명이인이 없을 경우
+			target = searchList.get(0);
+		}
+		
+		// 수정할 전화번호 입력
+		System.out.println("수정할 전화번호 입력 : ");
+		String phone =  br.readLine();
+		
+		// 정보수정 서비스 호출 후 결과 문자열 반환 받기
+		String result = service.updateMember(target, phone);
+		System.out.println(result);
+		
+	}
+	
+	
+	// ------------------------------------------------------
+	// [회원 탈퇴]
+	
+	
+	private void deleteMember() throws IOException {
+		System.out.println("\n----- 회원 탈퇴 -----\n");
+		
+		System.out.print("회원 이름 입력 : ");
+		
+		String targetName = br.readLine();
+		
+		// 이름이 일치하는 회원 모두 조회
+		List<Member> searchList = service.selectName(targetName);
+		
+		
+		// 이름이 일치하는 회원이 없을 경우
+		if(searchList.isEmpty()) {
+			System.out.println("\n### 이름이 일치하는 회원이 존재하지 않습니다 ###\n");
+			return;
+		}
+		
+		// 수정 대상을 참조할 변수 선언
+		Member target = null;
+		
+		if(searchList.size() > 1) { // 동명이인 있을 경우
+			
+			System.out.println("\n*** 대상 회원을 선택 해주세요 ***\n");
+			
+			for(int i = 0 ; i < searchList.size() ; i++) {
+				System.out.printf("%d) %s (%s)\n",
+						i+1, 
+						searchList.get(i).getName(),
+						searchList.get(i).getPhone());
+			}
+			
+			System.out.print("선택할 회원의 번호를 입력 : ");
+			int input = Integer.parseInt( br.readLine() ) - 1;
+			
+			if(input < 0 || input >= searchList.size()) {
+				System.out.println("\n### 없는 회원 번호 입니다. 다시 시도 해주세요 ###\n");
+				return;
+			}
+			
+			target = searchList.get(input);
+		
+		} else { // 동명이인 없을 경우
+			target = searchList.get(0);
+		}
+		
+		// 정말 탈퇴를 할 것인지 확인
+		System.out.println("정말 탈퇴 처리 하시겠습니까 ? (y/n) : ");
+		
+		// 입력 받은 문자열을 소문자로 만들어
+		// 제일 앞 문자 하나만 반환 받기
+		char check = br.readLine().toLowerCase().charAt(0);
+		
+		if(check == 'n') {
+			System.out.println("\n### 탈퇴 취소 ###\n");
+			return;
+		}
+		
+		if(check != 'y') {
+			System.out.println("\n### 잘못 입력 하셨습니다. 다시 시도 해주세요. ###\n");
+			return;
+		}
+		
+		// y 입력 된 경우
+		
+		// 탈퇴 서비스 호출 후 결과 문자열 반환 받기
+		String result = service.deleteMember(target);
+		
+		System.out.println(result);
+	}
+	
 	
 	
 	

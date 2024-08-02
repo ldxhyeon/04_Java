@@ -115,8 +115,21 @@ public class TestMemberView {
 		}
 		
 		boolean result = service.addMember(name,phone);
+		
+		System.out.println(result);
 	}
 	
+	// 프로그래밍 언어응용 - 문제 해결 시나리오
+	
+	// 8월 5일
+	
+	// - 문제 원인
+	// 1) 어디서 발생했는가
+	// 2) 어떠한 이유로 발생했는가
+	
+	// - 조치 내용
+	// 1) 해결 방법에 대한 설명
+	// 2) 오류가 해결된 코드
 	
 	
 	

@@ -1,8 +1,10 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor // 기본 생성자
 @AllArgsConstructor // 전체 필드 매개 변수 생성자
 @ToString // toString() 오버라이딩
+@EqualsAndHashCode // equals(), hashCode() 오버라이딩
 public class Member implements Serializable{ // + 직렬화
 	
 	// DTO(Data Transfer Object) : 데이터 전달용 객체
@@ -33,6 +36,7 @@ public class Member implements Serializable{ // + 직렬화
 	private String phone;
 	private int amount;
 	private int grade;
+	
 	
 	
 	

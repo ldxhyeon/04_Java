@@ -103,6 +103,12 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		
 	}
+	
+	@Override
+	public List<Member> selectName() {
+		
+		return memberList;
+	}
 		
 	
 	
