@@ -25,7 +25,7 @@ public class TestMemberView {
 		}catch(Exception e) {
 			System.out.println("*** 프로그램 실행 중 오류 발생 ***");
 			e.printStackTrace();
-			System.exit(0);
+			System.exit(0); // 에러 발생하면 프로그램 종료
 		}
 		
 	}
@@ -87,6 +87,7 @@ public class TestMemberView {
 		
 		System.out.println("메뉴 선택 >>>> ");
 		
+		// readLine은 String 타입이라 int형으로 변환
 		int input = Integer.parseInt( br.readLine() );
 		System.out.println();
 		

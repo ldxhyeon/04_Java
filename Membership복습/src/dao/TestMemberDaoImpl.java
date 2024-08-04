@@ -20,7 +20,9 @@ public class TestMemberDaoImpl implements TestMemberDao {
 	private ObjectInputStream ois = null;
 	private ObjectOutputStream oos = null;
 	
-	public TestMemberDaoImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
+	public TestMemberDaoImpl() throws FileNotFoundException,
+									  IOException, 
+									  ClassNotFoundException {
 		
 		
 		// 파일이 존재하는지 검사
@@ -29,7 +31,10 @@ public class TestMemberDaoImpl implements TestMemberDao {
 		// 파일이 있다면
 		if(file.exists()) { // 존재하는 경우
 			try {
-				// 스트림생성
+				
+				// ObjectInputStream을 사용하여 파일에서 객체를 읽어온다.
+				// ois = new ObjectInputStream(new FileInputStream(FILE_PATH))로 스트림을 생성
+				// 다시 객체로 복원하는 과정
 				ois = new ObjectInputStream(new FileInputStream(FILE_PATH));
 				
 				// 저장된 객체에 파일에서 읽어와

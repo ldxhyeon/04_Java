@@ -153,7 +153,7 @@ public class MemberView {
 		// 회원 목록을 조회해 반환하는 서비스 호출
 		List<Member> memberList = service.getMemberList();
 		
-		// 조회된 회원 목록이 없을 경우
+		// 조회된 회원 목록이 없을 경우 
 		// -> MemberDaoImpl 생성자 코드에 의해서
 		// memberList는 "절대로" null이 될 수 없다!!
 		// 

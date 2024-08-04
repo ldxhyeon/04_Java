@@ -8,7 +8,7 @@ import dto.TestMember;
 public interface TestMemberDao {
 
 	
-	
+	List<TestMember> getMemberList();
 
 	/**
 	 * 회원 추가
@@ -20,5 +20,5 @@ public interface TestMemberDao {
 	
 	
 
-	List<TestMember> getMemberList();
+	
 }

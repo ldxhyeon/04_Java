@@ -13,6 +13,13 @@ public class TestMemberServiceImpl implements TestMemberService {
 	
 	private TestMemberDao dao = null;
 	
+	public TestMemberServiceImpl() throws FileNotFoundException, 
+										  ClassNotFoundException, 
+										  IOException {
+		dao = new TestMemberDaoImpl();	
+
+}
+	
 
 	@Override
 	public boolean addMember(String name, String phone) throws IOException {
