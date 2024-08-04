@@ -1,5 +1,7 @@
 package dto;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class TestMember {
+public class TestMember implements Serializable {
 
 	// 상수 변하지 않는 값.
 	public static final int COMMON = 0;

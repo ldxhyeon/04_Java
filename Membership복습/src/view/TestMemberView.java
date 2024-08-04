@@ -74,7 +74,7 @@ public class TestMemberView {
 	}
 	
 	
-	public int selectMenu() throws NumberFormatException, IOException {
+	private int selectMenu() throws NumberFormatException, IOException {
 		System.out.println("\n===== 회원 관리 프로그램 =====\n");
 		
 		System.out.println("1.회원 가입(추가)");
@@ -116,7 +116,11 @@ public class TestMemberView {
 		
 		boolean result = service.addMember(name,phone);
 		
-		System.out.println(result);
+		if(result) {
+			System.out.println("\n*** 회원이 추가 되었습니다. ***\n");
+		}else {
+			System.out.println("\n### 중복되는 휴대폰 번호가 존재합니다. ###\n");
+		}
 	}
 	
 	// 프로그래밍 언어응용 - 문제 해결 시나리오

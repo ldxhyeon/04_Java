@@ -1,7 +1,9 @@
 package service;
 
+import java.io.IOException;
+
 public interface TestMemberService {
 
-	boolean addMember(String name, String phone);
+	public boolean addMember(String name, String phone)throws IOException;
 
 }
