@@ -18,10 +18,21 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Todo implements Serializable { // 직렬화
 	
-	 private String title; 			// 할일 제목
+
+	private String title; 			// 할일 제목
 	 private String detail;			// 상세 내용
 	 private boolean complete;  	// 완료 여부
 	 private LocalDateTime regDate; // 등록 날짜 
+	 
+	 
+	 public Todo(String title, String detail, boolean complete) {
+		 this.title = title;
+		 this.detail = detail;
+		 this.complete = complete;
+		 
+	}
+	 
+	 
 	 
 	// java.time 패키지
 	// LocalDateTime : 날짜, 시간을 나타내는 클래스

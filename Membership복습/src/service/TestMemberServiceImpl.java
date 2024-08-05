@@ -44,5 +44,14 @@ public class TestMemberServiceImpl implements TestMemberService {
 		
 		
 	}
+
+
+	@Override
+	public List<TestMember> getMemberList() {
+		
+		return dao.getMemberList();
+	}
+
+
 	
 }

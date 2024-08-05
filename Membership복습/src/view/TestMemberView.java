@@ -3,7 +3,9 @@ package view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
+import dto.TestMember;
 import service.TestMemberService;
 import service.TestMemberServiceImpl;
 
@@ -44,7 +46,7 @@ public class TestMemberView {
 				
 				switch(input) {
 				case 1 : addMember(); break;
-				case 2 : break;
+				case 2 : selectAll(); break;
 				case 3 : break;
 				case 4 : break;
 				case 5 : break;
@@ -122,6 +124,33 @@ public class TestMemberView {
 		}else {
 			System.out.println("\n### 중복되는 휴대폰 번호가 존재합니다. ###\n");
 		}
+	}
+	
+	private void selectAll() {
+		System.out.println("\n----- 회원 전체 조회 -----\n");
+	
+		List<TestMember> memberList = service.getMemberList();
+		
+		// null은 객체 자체가 없음을 의미
+		if(memberList.isEmpty() ) {
+			System.out.println("\n### 회원이 존재하지 않습니다 ###\n");
+			return;
+		}
+		
+		String[] gradesArr = {"일반", "골드", "다이아"};
+		
+		System.out.println("-------------------------------------------");
+		
+		System.out.printf("%-6s %-7s %8s %5s \n",
+				"[이름]", "[휴대폰 번호]", "[누적금액]", "[등급]");
+		
+		System.out.println("-------------------------------------------");
+		
+		for(TestMember member : memberList) {
+			System.out.printf("%-6s %-12s %8d %5s \n",
+					member.getName(), member.getPhone(), member.getAmount(), gradesArr[member.getGrade()]);
+		}
+		
 	}
 	
 	// 프로그래밍 언어응용 - 문제 해결 시나리오

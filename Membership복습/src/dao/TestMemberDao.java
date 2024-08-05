@@ -17,6 +17,7 @@ public interface TestMemberDao {
 	 * @throws IOException
 	 */
 	boolean addMember(TestMember member) throws IOException;
+
 	
 	
 
