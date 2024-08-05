@@ -25,7 +25,7 @@ public class TestMemberView {
 		}catch(Exception e) {
 			System.out.println("*** 프로그램 실행 중 오류 발생 ***");
 			e.printStackTrace();
-			System.exit(0);
+			System.exit(0); // 에러 발생하면 프로그램 종료
 		}
 		
 	}
@@ -74,7 +74,7 @@ public class TestMemberView {
 	}
 	
 	
-	public int selectMenu() throws NumberFormatException, IOException {
+	private int selectMenu() throws NumberFormatException, IOException {
 		System.out.println("\n===== 회원 관리 프로그램 =====\n");
 		
 		System.out.println("1.회원 가입(추가)");
@@ -87,6 +87,7 @@ public class TestMemberView {
 		
 		System.out.println("메뉴 선택 >>>> ");
 		
+		// readLine은 String 타입이라 int형으로 변환
 		int input = Integer.parseInt( br.readLine() );
 		System.out.println();
 		
@@ -116,7 +117,11 @@ public class TestMemberView {
 		
 		boolean result = service.addMember(name,phone);
 		
-		System.out.println(result);
+		if(result) {
+			System.out.println("\n*** 회원이 추가 되었습니다. ***\n");
+		}else {
+			System.out.println("\n### 중복되는 휴대폰 번호가 존재합니다. ###\n");
+		}
 	}
 	
 	// 프로그래밍 언어응용 - 문제 해결 시나리오
