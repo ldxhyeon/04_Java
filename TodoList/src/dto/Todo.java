@@ -25,12 +25,17 @@ public class Todo implements Serializable { // 직렬화
 	 private LocalDateTime regDate; // 등록 날짜 
 	 
 	 
-	 public Todo(String title, String detail, boolean complete) {
+	 public Todo(String title, String detail) {
 		 this.title = title;
 		 this.detail = detail;
-		 this.complete = complete;
 		 
 	}
+	 
+	 
+//	 @Override
+//		public String toString() {
+//			return "2024_08_02" + "15:17:25" + "(O)" + title;
+//		}
 	 
 	 
 	 

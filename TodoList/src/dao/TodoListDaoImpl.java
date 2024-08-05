@@ -1,5 +1,7 @@
 package dao;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,13 @@ import dto.Todo;
 
 public class TodoListDaoImpl implements TodoListDao{
 	
-	private List<Todo> memberList = null;
+	private List<Todo> memberList = new ArrayList<Todo>();
+	
+	
+	public TodoListDaoImpl() {
+	}
+	
+	
 	
 	
 
@@ -29,18 +37,22 @@ public class TodoListDaoImpl implements TodoListDao{
 	@Override
 	public boolean addlist(Todo todo) {
 		
+		
 		memberList.add(todo);
 		
 		return true;
 	}
-
+		
 
 
 	@Override
 	public List<Todo> fullView() {
 		
+		
 		return memberList;
 	}
+	
+
 	
 	
 	

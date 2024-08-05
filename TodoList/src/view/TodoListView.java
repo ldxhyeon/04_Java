@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import dao.TodoListDaoImpl;
 import dto.Todo;
+import service.TodoListServiceImpl;
 import service.TodoService;
 
 public class TodoListView {
@@ -18,7 +18,8 @@ public class TodoListView {
 	public TodoListView() {
 		
 		try {
-//			service = new TodoListDaoImpl();
+			
+			service = new TodoListServiceImpl();
 			
 			br = new BufferedReader(new InputStreamReader(System.in));
 			
@@ -48,7 +49,7 @@ public class TodoListView {
 				case 5 : break;
 				case 6 : break;
 				
-				case 0: System.out.println("***** 프로그램 종료 *****");
+				case 0: System.out.println("***** 프로그램 종료 *****"); break;
 				default : System.out.println("### 메뉴에 작성된 번호만 입력 해주세요.");
 				}
 				
@@ -99,6 +100,8 @@ public class TodoListView {
 	private void fullView() {
 		System.out.println("\n===============[1. Todo List Full View]===============\n");
 		
+		List<Todo> list = service.fullView();
+		
 		System.out.println("[ 완료된 Todo 개수 / 전체 Todo 수 : 2 / 5 ]");
 		System.out.println("--------------------------------------------------------------------");
 		System.out.printf("%-10s %-10s %8s %12s \n",
@@ -106,9 +109,17 @@ public class TodoListView {
 		
 		
 		
-		List<Todo> list = service.fullView();
 		
-		System.out.println(list);
+		
+//		for(Todo fullList : list) {
+//			System.out.printf("%-10s %-10s\n",
+//					fullList.getTitle(), fullList.getDetail());
+//		}
+		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.printf("[%d] %s\n",i, list.get(i).toString());
+		}
+		
 			
 		
 	}
@@ -122,6 +133,12 @@ public class TodoListView {
 		String detail = br.readLine();
 		
 		boolean result = service.addList(title, detail);
+		
+		if(result) {
+			System.out.println("\n*** 인덱스에 추가 되었습니다. ***\n");
+		}else {
+			System.out.println("\n### 중복되는 휴대폰 번호가 존재합니다. ###\n");
+		}
 		
 	}
 	
