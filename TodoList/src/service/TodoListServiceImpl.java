@@ -4,7 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dao.TodoListDao;
 import dao.TodoListDaoImpl;
@@ -12,33 +14,37 @@ import dto.Todo;
 
 public class TodoListServiceImpl implements TodoService{ 
 	
+	// 인터페이스는 객체 생성 불가
 	private TodoListDao dao = null;
 	
+	// 기본생성자
 	public TodoListServiceImpl() throws FileNotFoundException, 
-										 ClassNotFoundException, 
-										 IOException {
+										ClassNotFoundException, 
+										IOException {
+	// 기본생성자 호출시 TodoListDao 객체 생성	
 	dao = new TodoListDaoImpl();	
 
 }
-	
-	@Override
-	public List<Todo> fullView() {
-		
-		
-		return dao.fullView();
-	}
 
 	@Override
-	public boolean addList(String title, String detail) {
+	public Map<String, Object> todoListFullView() {
 		
+		// 할 일 목록 얻어오기
+		List<Todo> todoList = dao.todoListFullView();
 		
-		Todo todo = new Todo(title, detail);
+		int completeCount = 0;
 		
-		boolean result = dao.addlist(todo);
+		for(Todo todo : todoList) {
+			completeCount++;
+		}
 		
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("todoList", todoList);
+		map.put("completeCount", completeCount);
 		
-		return result;
+		return map;
 	}
+	
 	
 	@Override
 	public String dateFormat(LocalDateTime regDate) {
@@ -49,6 +55,11 @@ public class TodoListServiceImpl implements TodoService{
 		
     return formattedDateTime;
 	}
+
+
+	
+
+	
 	
 	
 
