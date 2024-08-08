@@ -55,6 +55,71 @@ public class TodoListServiceImpl implements TodoService{
 		
     return formattedDateTime;
 	}
+	
+	@Override
+	public int todoAdd(String title, String detail) throws FileNotFoundException, IOException {
+		
+		// 라이브러리로 인한 생성자 x
+		Todo todo = new Todo(title, detail, false, LocalDateTime.now());
+		
+		return dao.todoAdd(todo);
+	}
+	
+	
+	@Override
+	public String todoDetailView(int index) {
+		
+		// 인덱스 전달
+		Todo todo = dao.todoDetailView(index);
+		
+		if(todo == null) return null;
+		
+		// 스트링빌더를 이용한 스트링문자열 저장
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("--------------------------------------------\n");
+		sb.append( String.format("제목 : %s\n", todo.getTitle()));
+		sb.append( String.format("등록일 : %s\n", dateFormat(todo.getRegDate())));
+		// boolean 타입은 get이 아닌 is를 사용해서 값을 얻어옴
+		// 현재 롬복으로 인해 자동으로 생성됨.
+		sb.append( String.format("완료여부 : %s\n", todo.isComplete() ? "O" : "X") );
+		sb.append("\n[세부 내용]\n");
+		sb.append("--------------------------------------------\n");
+		sb.append( String.format("%s\n", todo.getDetail()) );
+		
+		return sb.toString();
+	}	
+	
+	
+	
+	
+	@Override
+	public boolean todoComplete(int index) {
+		
+		return dao.todoComplete(index);
+	}
+	
+	
+	
+	
+	// 회원 내용 수정
+	@Override
+	public boolean todoUdate(int index, String title, String detail) throws FileNotFoundException, IOException {
+		
+		return dao.todoUpdate(index, title, detail);
+	}
+	
+	
+	// 회원 탈퇴
+	@Override
+	public String todoDelete(int index) throws FileNotFoundException, IOException {
+		
+		Todo deleteTarget = dao.todoDelete(index);
+		
+		if(deleteTarget != null) 	return deleteTarget.getTitle();
+		
+		return null;
+	}
 
 
 	

@@ -35,6 +35,8 @@ public class Todo implements Serializable { // 직렬화
 	 
 	 
 	 
+	 
+	 
 
 	
 }

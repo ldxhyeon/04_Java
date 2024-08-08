@@ -22,6 +22,9 @@ public class TodoListView {
 			
 			service = new TodoListServiceImpl();
 			
+			// 입렵 값 받기
+			// 버퍼를 사용하면 한번에 읽어오기 가능
+			// inputStreamReader = 입력 스트림을 문자 스트림으로 변환해주는 클래스
 			br = new BufferedReader(new InputStreamReader(System.in));
 			
 		}catch(Exception e) {
@@ -44,11 +47,11 @@ public class TodoListView {
 				
 				switch(input) {
 				case 1 : todoListFullView();	break;
-				case 2 : break;
+				case 2 : todoDetailView(); 		break;
 				case 3 : todoAdd(); 			break;
-				case 4 : break;
-				case 5 : break;
-				case 6 : break;
+				case 4 : todoComplete(); 		break;
+				case 5 : todoUpdate();			break;
+				case 6 : todoDelete();			break;
 				
 				case 0: System.out.println("***** 프로그램 종료 *****");
 				br.close();				
@@ -79,6 +82,7 @@ public class TodoListView {
 	
 
 	
+
 
 	private int selectMenu() throws NumberFormatException, IOException {
 		
@@ -116,6 +120,10 @@ public class TodoListView {
 		System.out.printf("[ 완료된 Todo 개수 / 전체 Todo 수 : %d / %d ]\n"
 								, completeCount, todoList.size());
 		
+		System.out.println("--------------------------------------------------------------------");
+		System.out.printf(" %-3s    %10s    %10s    %s\n", "인덱스", "등록일", "완료여부", "할 일 제목");
+		System.out.println("--------------------------------------------------------------------");
+		
 		
 		for(int i = 0, len = todoList.size(); i < len; i++) {
 			String title = todoList.get(i).getTitle();
@@ -150,13 +158,103 @@ public class TodoListView {
 			sb.append(content);
 			// 문자열 바꿈 추가
 			sb.append("\n");
+			
+			System.out.println("-----------------------------------------------");
+			
+			int index = service.todoAdd(title,sb.toString());
 		}
 		
-		
-		
-		
-		
 	}
+	
+
+	private void todoDetailView() throws IOException {
+		
+		System.out.println("===============[2. Todo Detail View]===============");
+		
+		System.out.println("인덱스 번호 입력 : ");
+		int index = Integer.parseInt(br.readLine());
+		
+		
+		String todoDetail = service.todoDetailView(index);
+		
+		if(todoDetail == null) {
+			System.out.println("### 입력한 인덱스 번호에 할 일이 존재하지 않습니다.");
+			return;
+		}
+		
+		System.out.println(todoDetail);
+	}
+	
+	/** 할 일 완료 여부 변경 (O <-> X) 
+	 * @throws IOException 
+	 * @throws NumberFormatException 
+	 */
+	
+	public void todoComplete() throws NumberFormatException, IOException {
+		System.out.println("===============[4. Todo Complete]===============");
+		System.out.println("O <-> X 변경할 인덱스 번호 입력 : ");
+		int index = Integer.parseInt(br.readLine());
+		
+		boolean result = service.todoComplete(index);
+		
+		if(result) System.out.println("[변경 되었습니다.]");
+		else System.out.println("### 입력한 인덱스에 Todo가 존재하지 않습니다.");
+	}
+	
+	
+	
+	public void todoUpdate() throws NumberFormatException, IOException {
+		System.out.println("\n===============[5. Todo Update]===============\n");
+		System.out.println("수정할 TOdo 인덱스 번호 입력 : ");
+		int index = Integer.parseInt(br.readLine());
+		
+		String todoDetail  = service.todoDetailView(index);
+		
+		if(todoDetail == null) {
+			System.out.println("### 입력한 인덱스 번호에 할 일(Todo)가 존재하지 않습니다 ###");
+			return;
+		}
+		
+		System.out.println("@@@@@@@@@@@[수정 전]@@@@@@@@@@@@@@@");
+		System.out.println(todoDetail);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		
+		System.out.print("수정할 제목 : ");
+		String title = br.readLine();
+		
+		System.out.println("\n수정할 세부 내용 작성 (입력 종료 시 !wq 작성 후 엔터)");
+		System.out.println("-----------------------------------------------");
+		
+		// 여러개의 문자열을 한번에 옮기려고 사용함.
+		StringBuilder sb = new StringBuilder();
+		
+		while(true) {
+			String content = br.readLine();
+			
+	 		if(content.equals("!wq")) break;
+	 		
+	 		sb.append(content);
+	 		sb.append("\n");
+		}
+		
+		System.out.println("-----------------------------------------------");
+		
+		boolean result = service.todoUdate(index, title, sb.toString());
+	}
+	
+	
+	public void todoDelete() throws NumberFormatException, IOException {
+		System.out.println("===============[6. Todo Delete]===============");
+		System.out.println("삭제할 인덱스 번호 입력 : ");
+		int index = Integer.parseInt(br.readLine());
+		
+		String title = service.todoDelete(index);
+		
+		if(title != null) System.out.println("[삭제 되었습니다]");
+		else System.out.println("### 입력한 인덱스에 Todo가 존재하지 않습니다 ###");
+	}
+	
+	
 		
 		
 		
